@@ -2,13 +2,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 public class ic22b037IO {
     public static void main(String[] args) {
         try {
             File file = new File("pic.jpeg");
 
-            // Überprüfen, ob die Datei existiert
+            // Create a logfile
+            FileOutputStream logFile = new FileOutputStream("log.txt");
+            PrintStream logStream = new PrintStream(logFile);
+
+            // Redirect System.out and System.err to the logfile
+            System.setOut(logStream);
+            System.setErr(logStream);
+
+            // Rest of your code remains unchanged
             if (file.exists()) {
                 System.out.println("Datei existiert: " + file.exists());
                 System.out.println("Ist ein Verzeichnis: " + file.isDirectory());
@@ -21,14 +30,6 @@ public class ic22b037IO {
                 System.out.println("Zuletzt geändert: " + file.lastModified());
 
                 // Message in der Datei suchen
-                findHiddenMessage(file);
-            } else {
-                System.out.println("Die Datei existiert nicht.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static void findHiddenMessage(File file) throws IOException {
         FileInputStream inputStream = new FileInputStream(file);
