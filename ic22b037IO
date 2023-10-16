@@ -30,6 +30,14 @@ public class ic22b037IO {
                 System.out.println("Zuletzt geändert: " + file.lastModified());
 
                 // Message in der Datei suchen
+                findHiddenMessage(file);
+            } else {
+                System.out.println("Die Datei existiert nicht.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static void findHiddenMessage(File file) throws IOException {
         FileInputStream inputStream = new FileInputStream(file);
